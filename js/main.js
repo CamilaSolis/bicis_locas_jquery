@@ -1,26 +1,22 @@
 function validateForm(){
-	var valnom = document.getElementById('name').value;
-	var valape = document.getElementById('lastname').value;
-	var valemail = document.getElementById('input-email').value;
-	var valpass = document.getElementById('input-password').value;
-	var valbici = document.getElementsByTagName('select')[0];
+	var valnom = $('#name').val();
+	var valape = $('#lastname').val();
+	var valemail = $('#input-email').val();
+	var valpass = $('#input-password').val();
+	var valbici = $('select');
 
 	//Nombre
 	function nom(){
 		if( valnom == null || valnom.length == 0 || /^\s+$/.test(valnom) ) {
-			var container = document.getElementsByClassName('input-box')[0];
-			var errorSpan = document.createElement('span');
-			var nodoNom = document.createTextNode('¡¡No olvide ingresar su nombre!!');
-			errorSpan.appendChild(nodoNom);
-			container.appendChild(errorSpan);
+			var container = $('.name-container');
+			var nodoNom = "<span>¡¡No olvide ingresar su nombre!!</span>";
+			container.append(nodoNom);
 			return false;
 			
-		}	else if (/^[A-Za-z]*$/.test(valnom) == false || valnom.substring(0,1) == valnom.substring(0,1).toUpperCase() == false )  {  
-			var container = document.getElementsByClassName('input-box')[0];
-			var errorSpan = document.createElement('span');
-			var nodoNom = document.createTextNode('Su nombre no puede tener numeros y debe comenzar con mayuscula');
-			errorSpan.appendChild(nodoNom);
-			container.appendChild(errorSpan);
+		}	else if (/^[A-Za-z]*$/.test(valnom) == false || valnom.substring(0,1) == valnom.substring(0,1).toUpperCase() == false )  {
+			var container = $('.name-container');  
+			var nodoNom = "<span>Su nombre no puede tener numeros y debe comenzar con mayuscula</span>";
+			container.append(nodoNom);
 			return true;
 		}
 	}
@@ -29,19 +25,15 @@ function validateForm(){
 	//Apellido
 	function apellido(){
 		if( valape == null || valape.length == 0 || /^\s+$/.test(valape) ) {
-			var container = document.getElementsByClassName('lastname-container')[0];
-			var errorSpan = document.createElement('span');
-			var nodoNom = document.createTextNode('¡¡No olvide ingresar su apellido!!');
-			errorSpan.appendChild(nodoNom);
-			container.appendChild(errorSpan);
+			var container = $('.lastname-container');
+			var nodoNom = "<span>¡¡No olvide ingresar su apellido!!</span>";
+			container.append(nodoNom);
 			return false;
 		}
 		else if (/^[A-Za-z]*$/.test(valape) == false || valape.substring(0,1) == valape.substring(0,1).toUpperCase() == false){  
-			var container = document.getElementsByClassName('lastname-container')[0];
-			var errorSpan = document.createElement('span');
-			var nodoNom = document.createTextNode('Su apellido no puede tener numeros y debe comenzar con mayuscula');
-			errorSpan.appendChild(nodoNom);
-			container.appendChild(errorSpan);
+			var container = $('.lastname-container');
+			var nodoNom = "<span>Su apellido no puede tener numeros y debe comenzar con mayuscula</span>";
+			container.append(nodoNom);
 			return true;
 		} 
 	}
@@ -51,11 +43,9 @@ function validateForm(){
 	//Email
 	function email(){
 		if( !(/\S+@\S+\.\S+/.test(valemail)) ) {
-			var container = document.getElementsByClassName('input-box')[2];
-			var errorSpan = document.createElement('span');
-			var nodoNom = document.createTextNode('Correo no valido');
-			errorSpan.appendChild(nodoNom);
-			container.appendChild(errorSpan);
+			var container = $('.email-container');
+			var nodoNom = "<span>Correo no valido</span>";
+			container.append(nodoNom);
 			return false;
 		}
 	}
@@ -64,19 +54,15 @@ function validateForm(){
 	//Password
 	function password(){
 		if( valpass == null || valpass.length < 6 || /^\s+$/.test(valpass)) {
-			var container = document.getElementsByClassName('input-box')[3];
-			var errorSpan = document.createElement('span');
-			var nodoNom = document.createTextNode('Su password debe tener minimo 6 caracteres');
-			errorSpan.appendChild(nodoNom);
-			container.appendChild(errorSpan);
+			var container = $('#input-password').parent();
+			var nodoNom = "<span>Su password debe tener minimo 6 caracteres</span>";
+			container.append(nodoNom);
 			return false;
 		}
-		if (valpass === "password" || valpass==="123456" || valpass==="098754") {
-			var container = document.getElementsByClassName('input-box')[3];
-			var errorSpan = document.createElement('span');
-			var nodoNom = document.createTextNode('Su password no puede ser <password>, <123456> ni <098754>');
-			errorSpan.appendChild(nodoNom);
-			container.appendChild(errorSpan);
+		else if(valpass === "password" || valpass==="123456" || valpass==="098754") {
+			var container = $('#input-password').parent();
+			var nodoNom = "<span>Su password no puede ser 'password', '123456' ni '098754'</span>";
+			container.append(nodoNom);
 			return true;
 		}
 	}
@@ -85,11 +71,9 @@ function validateForm(){
 	//Tipo de Bici
 	function bici(){
 		var modelo = valbici.value;
-        var container = document.getElementsByClassName('input-box')[4];
-		var errorSpan = document.createElement('span');
-		var nodoNom = document.createTextNode('Elija su tipo de bici');
-		errorSpan.appendChild(nodoNom);
-		container.appendChild(errorSpan);
+        var container = $('select.form-control').parent()
+		var nodoNom = "<span>Elija su tipo de bici</span>";
+		container.append(nodoNom);
 		return false;
 		return modelo == 'Urbana' || modelo == 'Treking' || modelo == 'Eléctrica' || modelo == 'Estática';
 	}
